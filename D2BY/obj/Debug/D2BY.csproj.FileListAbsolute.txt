@@ -1,0 +1,16 @@
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\D2BY.exe.config
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\D2BY.exe
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\D2BY.pdb
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\obj\Debug\D2BY.csprojResolveAssemblyReference.cache
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\obj\Debug\D2BY.exe
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\obj\Debug\D2BY.pdb
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\EntityFramework.dll
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\System.Data.SQLite.dll
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\System.Data.SQLite.EF6.dll
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\System.Data.SQLite.Linq.dll
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\EntityFramework.xml
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\System.Data.SQLite.xml
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\Newtonsoft.Json.dll
+c:\users\waseem.hassan\documents\visual studio 2015\Projects\D2BY\D2BY\bin\Debug\Newtonsoft.Json.xml
