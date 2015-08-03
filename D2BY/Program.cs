@@ -20,15 +20,19 @@ namespace D2BY
         private static async void CheckApi()
         {
             Dota2BestYoloClient Client = new Dota2BestYoloClient(Cookie);
-            
+
             //var response = await Client.SwitchTeamAsync("6409337", "8109");
             //Console.WriteLine(response.Message);
-            
+
             //await Client.GetMatchDetails("8135");
 
-            var response = await Client.SetClaimQueueAsync("76561198140394557", "2", "");
+            //var response = await Client.SetClaimQueueAsync("76561198140394557", "2", "");
 
-            Console.WriteLine(response.Message);
+            //await Client.GetUserStatsAsync();
+
+            await Client.GetBetHistoryAsync();
+
+            //Console.WriteLine(response.Message);
         }
 
     }

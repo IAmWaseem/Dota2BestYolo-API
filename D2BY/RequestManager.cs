@@ -43,6 +43,8 @@ namespace D2BY
                 
                 response.EnsureSuccessStatusCode();
 
+                var data = response.Content.ReadAsStringAsync();
+
                 return await response.Content.ReadAsStringAsync();
             }
         }

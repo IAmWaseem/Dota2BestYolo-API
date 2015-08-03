@@ -65,9 +65,21 @@ namespace D2BY
             return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("match/get-queue-status/qid/" + botId, RequestBodyFactory.EmptyRequestBody, HttpMethod.Get));
         }
 
-        public async Task<ResponseObject> GetMatchDetails(string matchId)
+        public async Task<ResponseObject> GetMatchDetailsAsync(string matchId)
         {
             return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("match/index-right/id/" + matchId, RequestBodyFactory.EmptyRequestBody, HttpMethod.Get));
+        }
+
+        public async Task<UserStats> GetUserStatsAsync()
+        {
+            return JsonConvert.DeserializeObject<UserStats>(await Manager.PerformRequestAsync("my/get-user-stats", RequestBodyFactory.EmptyRequestBody, HttpMethod.Get));
+        }
+
+        public async Task<ResponseObject> GetBetHistoryAsync()
+        {
+            var htmlBets = await Manager.PerformRequestAsync("my/get-bet-history", RequestBodyFactory.EmptyRequestBody, HttpMethod.Get);
+            HTMLParser.ParseBetsFromResponse(htmlBets);
+            return null;
         }
     }
 }
