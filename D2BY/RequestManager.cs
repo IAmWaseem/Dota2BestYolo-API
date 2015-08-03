@@ -1,40 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace D2BY
 {
     public class RequestManager
     {
-        private String BaseURL = "http://dota2bestyolo.com/";
+        private string BaseURL = "http://dota2bestyolo.com/";
         private Uri BaseURI = new Uri("http://dota2bestyolo.com/");
 
-        public String Cookie;
+        public string Cookie;
 
-        public RequestManager(String cookie)
+        public RequestManager(string cookie)
         {
             Cookie = cookie;
         }
 
-        public async Task<String> PerformRequestAsync(String action, FormUrlEncodedContent requestBody)
+        public async Task<string> PerformRequestAsync(string action, FormUrlEncodedContent requestBody)
         {
             return await RequestAsync(action, requestBody, HttpMethod.Post);
         }
 
-        private async Task<String> RequestAsync(String action, FormUrlEncodedContent requestBody, HttpMethod method)
+        public async Task<string> PerformRequestAsync(string action, FormUrlEncodedContent requestBody, HttpMethod method)
         {
+            return await RequestAsync(action, requestBody, method);
+        }
+
+        private async Task<string> RequestAsync(string action, FormUrlEncodedContent requestBody, HttpMethod method)
+        {
+            if (requestBody == RequestBodyFactory.EmptyRequestBody)
+                requestBody = null;
             var handler = new HttpClientHandler() { UseCookies = false };
+
             using(var Client = new HttpClient(handler))
             {
+                Client.Timeout = TimeSpan.FromMinutes(10);
                 HttpRequestMessage request = new HttpRequestMessage(method, new Uri(BaseURL + action));
                 request.Content = requestBody;
-                //request.Headers.Add("");
                 request.Headers.Add("Cookie", Cookie);
                 request.Headers.Date = DateTime.Now.AddYears(-5);
-                var response = Client.SendAsync(request).Result;
+                var response = Client.SendAsync(request, HttpCompletionOption.ResponseContentRead).Result;
+                
                 response.EnsureSuccessStatusCode();
 
                 return await response.Content.ReadAsStringAsync();

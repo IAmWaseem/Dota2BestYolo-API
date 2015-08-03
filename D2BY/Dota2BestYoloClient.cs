@@ -12,26 +12,62 @@ namespace D2BY
     {
         private RequestManager Manager;
 
-        public String BrowserCookie { get; set; }
+        public string BrowserCookie { get; set; }
 
-        public Dota2BestYoloClient(String Cookie)
+        public Dota2BestYoloClient(string Cookie)
         {
             BrowserCookie = Cookie;
             Manager = new RequestManager(BrowserCookie);
         }
 
-        public async Task<ResponseObject> SwitchTeamAsync(String id, String match)
+        public async Task<ResponseObject> SwitchTeamAsync(string id, string match)
         {
-            var requestBody = GetRequestBody_SwitchTeam(id, match);
+            var requestBody = RequestBodyFactory.GetRequestBody(RequestBody.SwitchTeam, id, match);
             return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/switch-bet/", requestBody));
         }
 
-        private FormUrlEncodedContent GetRequestBody_SwitchTeam(String id, String match)
+        public async Task<ResponseObject> SetClaimQueueAsync(string betID, string t, string code)
         {
-            var values = new Dictionary<String, String>();
-            values.Add("q", id);
-            values.Add("m", match);
-            return new FormUrlEncodedContent(values);
+            var requestBody = RequestBodyFactory.GetRequestBody(RequestBody.SetClaimQueue, betID, t, code);
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/claim-queue", requestBody));
+        }
+
+        public async Task<ResponseObject> SetOweQueueAsync()
+        {
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/owe-queue", RequestBodyFactory.EmptyRequestBody));
+        }
+
+        public async Task<ResponseObject> SetStashQueueAsync(string mode)
+        {
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/stash-queue/mode/" + mode, RequestBodyFactory.EmptyRequestBody));
+        }
+
+        public async Task<ResponseObject> SetOfferStashQueueAsync(List<string> items, List<string> originalIds, string mode)
+        {
+            var requestBody = RequestBodyFactory.GetRequestBody(RequestBody.SetOfferStashQueue, items, originalIds);
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/stash-add/mode/" + mode, requestBody));
+        }
+
+        public async Task<ResponseObject> CancelBetDataAsync(string id, string match)
+        {
+            var requestBody = RequestBodyFactory.GetRequestBody(RequestBody.CancelBetData, id, match);
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/cancel-bet", requestBody));
+        }
+
+        public async Task<ResponseObject> ConfirmAsSolvedAsync(string itemId)
+        {
+            var requestBody = RequestBodyFactory.GetRequestBody(RequestBody.ConfirmAsSolved, itemId);
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("my/missing-item-solved", requestBody));
+        }
+
+        public async Task<ResponseObject> GetQueueStatusAsync(string botId)
+        {
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("match/get-queue-status/qid/" + botId, RequestBodyFactory.EmptyRequestBody, HttpMethod.Get));
+        }
+
+        public async Task<ResponseObject> GetMatchDetails(string matchId)
+        {
+            return JsonConvert.DeserializeObject<ResponseObject>(await Manager.PerformRequestAsync("match/index-right/id/" + matchId, RequestBodyFactory.EmptyRequestBody, HttpMethod.Get));
         }
     }
 }
